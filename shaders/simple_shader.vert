@@ -1,9 +1,9 @@
 #version 460
 
 vec2 positions[] = {
-  vec2(0.0, -0.5),
-  vec2(0.5, 0.5),
-  vec2(-0.5, -0.5)
+  vec2(0.0, 0.5),
+  vec2(-0.5, -0.5),
+  vec2(0.5, -0.5)
 };
 
 void main() {
