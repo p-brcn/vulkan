@@ -20,6 +20,8 @@ namespace tve {
       glfwPollEvents();
       drawFrame();
     }
+
+    vkDeviceWaitIdle(tveDevice.device());
   }
 
   void FirstApp::createPipelineLayout() {
