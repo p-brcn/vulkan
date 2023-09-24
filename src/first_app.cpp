@@ -6,6 +6,7 @@
 namespace tve {
 
   FirstApp::FirstApp() {
+    loadModels();
     createPipelineLayout();
     createPipeline();
     createCommandBuffers();
@@ -22,6 +23,16 @@ namespace tve {
     }
 
     vkDeviceWaitIdle(tveDevice.device());
+  }
+
+  void FirstApp::loadModels() {
+    std::vector<TveModel::Vertex> vertices {
+      {{0.0f, -0.5f}, {1.0f, 0.0f, 0.0f}},
+      {{0.5f, 0.5f}, {0.0f, 1.0f, 0.0f}},
+      {{-0.5f, 0.5f}, {0.0f, 0.0f, 1.0f}}
+    };
+
+    tveModel = std::make_unique<TveModel>(tveDevice, vertices);
   }
 
   void FirstApp::createPipelineLayout() {
@@ -81,7 +92,8 @@ namespace tve {
       vkCmdBeginRenderPass(commandBuffers[i], &renderPassInfo, VK_SUBPASS_CONTENTS_INLINE);
 
       tvePipeline->bind (commandBuffers[i]);
-      vkCmdDraw(commandBuffers[i], 3, 1, 0, 0);
+      tveModel->bind(commandBuffers[i]);
+      tveModel->draw(commandBuffers[i]);
 
       vkCmdEndRenderPass(commandBuffers[i]);
       if (vkEndCommandBuffer(commandBuffers[i]) != VK_SUCCESS) {

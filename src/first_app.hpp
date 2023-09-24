@@ -4,6 +4,7 @@
 #include "tve_pipeline.hpp"
 #include "tve_device.hpp"
 #include "tve_swap_chain.hpp"
+#include "tve_model.hpp"
 
 #include <memory>
 #include <vector>
@@ -26,6 +27,7 @@ namespace tve {
     void run();
 
   private:
+    void loadModels();
     void createPipelineLayout();
     void createPipeline();
     void createCommandBuffers();
@@ -37,7 +39,7 @@ namespace tve {
     std::unique_ptr<TvePipeline> tvePipeline;
     VkPipelineLayout pipelineLayout;
     std::vector<VkCommandBuffer> commandBuffers;
-
+    std::unique_ptr<TveModel> tveModel;
   };
 }
 
