@@ -35,13 +35,13 @@ namespace tve {
 
 
     void TveModel::bind(VkCommandBuffer commandBuffer) {
-      vkCmdDraw(commandBuffer, vertexCount, 1, 0, 0);
-    }
-
-    void TveModel::draw(VkCommandBuffer commandBuffer) {
       VkBuffer buffers[] = {vertexBuffer};
       VkDeviceSize offsets[] = {0};
       vkCmdBindVertexBuffers(commandBuffer, 0, 1, buffers, offsets);
+    }
+
+    void TveModel::draw(VkCommandBuffer commandBuffer) {
+      vkCmdDraw(commandBuffer, vertexCount, 1, 0, 0);
     }
 
 
