@@ -28,7 +28,7 @@ namespace tve {
     ~TvePipeline();
 
     TvePipeline(const TvePipeline&) = delete;
-    void operator=(const TvePipeline&) = delete;
+    TvePipeline& operator=(const TvePipeline&) = delete;
 
     void bind(VkCommandBuffer commandBuffer);
     static PipelineConfigInfo defaultPipelineConfigInfo(uint32_t width, uint32_t height);

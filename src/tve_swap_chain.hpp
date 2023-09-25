@@ -18,7 +18,7 @@ namespace tve {
     ~TveSwapChain();
 
     TveSwapChain(const TveSwapChain &) = delete;
-    void operator=(const TveSwapChain &) = delete;
+    TveSwapChain &operator=(const TveSwapChain &) = delete;
 
     VkFramebuffer getFrameBuffer(int index) { return swapChainFramebuffers[index]; }
     VkRenderPass getRenderPass() { return renderPass; }
