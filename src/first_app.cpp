@@ -49,7 +49,8 @@ namespace tve {
   }
 
   void FirstApp::createPipeline() {
-    auto pipelineConfig = TvePipeline::defaultPipelineConfigInfo(tveSwapChain->width(), tveSwapChain->height());
+    PipelineConfigInfo pipelineConfig{};
+    TvePipeline::defaultPipelineConfigInfo(pipelineConfig);
     pipelineConfig.renderPass = tveSwapChain->getRenderPass();
     pipelineConfig.pipelineLayout = pipelineLayout;
     tvePipeline = std::make_unique<TvePipeline>(tveDevice, "shaders/simple_shader.vert.spv", "shaders/simple_shader.frag.spv", pipelineConfig);
@@ -92,6 +93,17 @@ namespace tve {
     renderPassInfo.pClearValues = clearValues.data();
 
     vkCmdBeginRenderPass(commandBuffers[imageIndex], &renderPassInfo, VK_SUBPASS_CONTENTS_INLINE);
+
+    VkViewport viewport{};
+    viewport.x = 0.0f;
+    viewport.y = 0.0f;
+    viewport.width = static_cast<float>(tveSwapChain->getSwapChainExtent().width);
+    viewport.height = static_cast<float>(tveSwapChain->getSwapChainExtent().height);
+    viewport.minDepth = 0.0f;
+    viewport.maxDepth = 1.0f;
+    VkRect2D scissor{{0, 0}, tveSwapChain->getSwapChainExtent()};
+    vkCmdSetViewport(commandBuffers[imageIndex], 0, 1, &viewport);
+    vkCmdSetScissor(commandBuffers[imageIndex], 0, 1, &scissor);
 
     tvePipeline->bind (commandBuffers[imageIndex]);
     tveModel->bind(commandBuffers[imageIndex]);
