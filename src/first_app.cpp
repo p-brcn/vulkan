@@ -68,7 +68,7 @@ namespace tve {
     TvePipeline::defaultPipelineConfigInfo(pipelineConfig);
     pipelineConfig.renderPass = tveSwapChain->getRenderPass();
     pipelineConfig.pipelineLayout = pipelineLayout;
-    tvePipeline = std::make_unique<TvePipeline>(tveDevice, "shaders/simple_shader.vert.spv", "shaders/simple_shader.frag.spv", pipelineConfig);
+    tvePipeline = std::make_unique<TvePipeline>(tveDevice, "shaders/spv/simple_shader.vert.spv", "shaders/spv/simple_shader.frag.spv", pipelineConfig);
   }
 
   void FirstApp::createCommandBuffers() {
