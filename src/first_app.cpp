@@ -11,7 +11,8 @@
 namespace tve {
 
   struct SimplePushConstantData {
-    alignas(8) glm::vec2 offset;
+    alignas(8)  glm::mat2 transform{1.0f};
+    alignas(8)  glm::vec2 offset;
     alignas(16) glm::vec3 color;
   };
 
